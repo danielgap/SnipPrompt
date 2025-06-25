@@ -112,47 +112,50 @@ Problemas encontrados:
 ## 🗓️ SEMANA 3: Frontend - Contexto y Componentes de Autenticación
 
 ### ✅ Tareas Completadas
-- [ ] **3.1 Contexto de Autenticación**
-  - [ ] Crear `client/src/store/AuthContext.tsx` compatible con React Scripts v5.0.1
-  - [ ] Estado de usuario actual
-  - [ ] Métodos `login`, `logout`, `register`
-  - [ ] Persistencia en localStorage
-  - [ ] Auto-verificación de token al cargar
-  - [ ] ⚠️ Manejar polyfills de webpack 5 si es necesario
+- [x] **3.1 Contexto de Autenticación**
+  - [x] Crear `client/src/store/AuthContext.tsx` compatible con React Scripts v5.0.1
+  - [x] Estado de usuario actual
+  - [x] Métodos `login`, `logout`, `register`
+  - [x] Persistencia en localStorage
+  - [x] Auto-verificación de token al cargar
+  - [x] ⚠️ Manejar polyfills de webpack 5 si es necesario (RESUELTO)
 
-- [ ] **3.2 Componentes de Autenticación**
-  - [ ] Crear `client/src/components/Auth/LoginForm.tsx`
-  - [ ] Crear `client/src/components/Auth/RegisterForm.tsx`
-  - [ ] Crear `client/src/components/Auth/AuthGuard.tsx` (protección de rutas)
-  - [ ] Actualizar `client/src/components/UI/index.ts` para exportar nuevos componentes
-  - [ ] Validar compatibilidad con CRACO v7.1.0
+- [x] **3.2 Componentes de Autenticación**
+  - [x] Crear `client/src/components/Auth/LoginForm.tsx`
+  - [x] Crear `client/src/components/Auth/RegisterForm.tsx`
+  - [ ] Crear `client/src/components/Auth/AuthGuard.tsx` (protección de rutas) (Pendiente para Semana 4)
+  - [ ] Actualizar `client/src/components/UI/index.ts` para exportar nuevos componentes (No necesario por ahora)
+  - [x] Validar compatibilidad con CRACO v7.1.0 (RESUELTO)
 
-- [ ] **3.3 Integración HTTP**
-  - [ ] Crear `client/src/utils/api.ts` con Axios v1.10.0 (sin vulnerabilidades CSRF/SSRF)
-  - [ ] Interceptor para añadir token automáticamente
-  - [ ] Manejo de errores 401
-  - [ ] Base URL configurada
-  - [ ] ⚠️ Configurar timeouts y retry policies
+- [x] **3.3 Integración HTTP**
+  - [x] Crear `client/src/utils/api.ts` con Axios v1.10.0 (sin vulnerabilidades CSRF/SSRF)
+  - [x] Interceptor para añadir token automáticamente
+  - [x] Manejo de errores 401
+  - [x] Base URL configurada
+  - [ ] ⚠️ Configurar timeouts y retry policies (Pendiente para hardening final)
 
-- [ ] **3.4 Actualizar Navegación**
-  - [ ] Modificar `client/src/components/Navigation/Navbar.tsx`
-  - [ ] Añadir menú de usuario (login/logout/perfil)
-  - [ ] Mostrar estado de autenticación
-  - [ ] Responsive design mantenido
+- [x] **3.4 Actualizar Navegación**
+  - [x] Modificar `client/src/components/Navigation/Navbar.tsx`
+  - [x] Añadir menú de usuario (login/logout/perfil)
+  - [x] Mostrar estado de autenticación
+  - [x] Responsive design mantenido
 
 ### 📝 Notas de Implementación Semana 3
 ```
-Fecha: ___________
-Desarrollador: ___________
+Fecha: 25/06/2025
+Desarrollador: danielgap
 Configuración: CRACO + webpack 5 polyfills funcionando ✅
 Frontend: 10 vulnerabilidades no críticas ✅
 
-Notas:
-
+Implementación Completada:
+- ✅ Interceptor de Axios (`api.ts`) para manejo de tokens y errores 401.
+- ✅ `AuthContext` para gestión de estado global de autenticación.
+- ✅ Formularios y páginas de `Login` y `Register`.
+- ✅ `Navbar` dinámica que refleja el estado de autenticación.
+- ✅ La aplicación ahora soporta el flujo completo de registro y login.
 
 Problemas encontrados:
-
-
+- Linter del IDE muestra errores de tipos en dependencias (`jwt-decode`), pero la compilación en Docker es exitosa. Se ignora por ser cosmético.
 ```
 
 ---
