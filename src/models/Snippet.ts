@@ -43,6 +43,16 @@ export const SnippetModel = sequelize.define<SnippetInstance>(
       allowNull: true,
       defaultValue: 0
     },
+    userId: {
+      type: INTEGER,
+      allowNull: true,
+      references: {
+        model: 'users',
+        key: 'id'
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'SET NULL'
+    },
     createdAt: {
       type: DATE
     },

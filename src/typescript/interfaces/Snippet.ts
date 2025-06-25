@@ -8,8 +8,9 @@ export interface Snippet extends Model {
   code: string;
   docs: string;
   isPinned: number;
+  userId?: number;
   tags?: { name: string }[];
 }
 
 export interface SnippetCreationAttributes
-  extends Optional<Snippet, 'id' | 'createdAt' | 'updatedAt'> {}
+  extends Optional<Snippet, 'id' | 'createdAt' | 'updatedAt' | 'userId'> {}
