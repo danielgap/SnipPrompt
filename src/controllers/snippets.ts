@@ -5,6 +5,11 @@ import { asyncWrapper } from '../middleware';
 import { SnippetModel, Snippet_TagModel, TagModel } from '../models';
 import { ErrorResponse, tagParser, Logger, createTags } from '../utils';
 import { Body, SearchQuery } from '../typescript/interfaces';
+import {
+  AuthenticatedRequest,
+  optionalAuth,
+  requireAuth
+} from '../middleware/auth';
 
 /**
  * @description Create new snippet
@@ -12,7 +17,11 @@ import { Body, SearchQuery } from '../typescript/interfaces';
  * @request POST
  */
 export const createSnippet = asyncWrapper(
-  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  async (
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
     // Get tags from request body
     const { language, tags: requestTags } = <Body>req.body;
     const parsedRequestTags = tagParser([
@@ -20,10 +29,11 @@ export const createSnippet = asyncWrapper(
       language.toLowerCase()
     ]);
 
-    // Create snippet
+    // Create snippet, asociando el userId si el usuario está autenticado
     const snippet = await SnippetModel.create({
       ...req.body,
-      tags: [...parsedRequestTags].join(',')
+      tags: [...parsedRequestTags].join(','),
+      userId: req.userId // Añadido desde el middleware de autenticación
     });
 
     // Create tags
@@ -47,8 +57,23 @@ export const createSnippet = asyncWrapper(
  * @request GET
  */
 export const getAllSnippets = asyncWrapper(
-  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  async (
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    // Si el usuario está autenticado, queremos mostrar sus snippets privados Y los públicos.
+    // Si no lo está, solo los públicos (aquellos sin userId).
+    const whereClause: any = {
+      [Op.or]: [{ userId: null }] // Todos pueden ver los snippets públicos
+    };
+
+    if (req.userId) {
+      whereClause[Op.or].push({ userId: req.userId }); // El usuario autenticado también ve los suyos
+    }
+
     const snippets = await SnippetModel.findAll({
+      where: whereClause,
       include: {
         model: TagModel,
         as: 'tags',
@@ -80,7 +105,11 @@ export const getAllSnippets = asyncWrapper(
  * @request GET
  */
 export const getSnippet = asyncWrapper(
-  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  async (
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
     const snippet = await SnippetModel.findOne({
       where: { id: req.params.id },
       include: {
@@ -98,6 +127,17 @@ export const getSnippet = asyncWrapper(
         new ErrorResponse(
           404,
           `Snippet with id of ${req.params.id} was not found`
+        )
+      );
+    }
+
+    // --- Validación de Propiedad ---
+    // Si el snippet es privado (tiene userId) y el usuario no es el dueño, no puede verlo
+    if (snippet.userId && snippet.userId !== req.userId) {
+      return next(
+        new ErrorResponse(
+          403,
+          'No tiene permiso para ver este snippet'
         )
       );
     }
@@ -120,7 +160,11 @@ export const getSnippet = asyncWrapper(
  * @request PUT
  */
 export const updateSnippet = asyncWrapper(
-  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  async (
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
     let snippet = await SnippetModel.findOne({
       where: { id: req.params.id }
     });
@@ -130,6 +174,17 @@ export const updateSnippet = asyncWrapper(
         new ErrorResponse(
           404,
           `Snippet with id of ${req.params.id} was not found`
+        )
+      );
+    }
+
+    // --- Validación de Propiedad ---
+    // Si el snippet tiene un dueño, solo ese dueño puede modificarlo.
+    if (snippet.userId && snippet.userId !== req.userId) {
+      return next(
+        new ErrorResponse(
+          403,
+          'No tiene permiso para modificar este snippet'
         )
       );
     }
@@ -166,7 +221,11 @@ export const updateSnippet = asyncWrapper(
  * @request DELETE
  */
 export const deleteSnippet = asyncWrapper(
-  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  async (
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
     const snippet = await SnippetModel.findOne({
       where: { id: req.params.id }
     });
@@ -176,6 +235,16 @@ export const deleteSnippet = asyncWrapper(
         new ErrorResponse(
           404,
           `Snippet with id of ${req.params.id} was not found`
+        )
+      );
+    }
+
+    // --- Validación de Propiedad ---
+    if (snippet.userId && snippet.userId !== req.userId) {
+      return next(
+        new ErrorResponse(
+          403,
+          'No tiene permiso para eliminar este snippet'
         )
       );
     }

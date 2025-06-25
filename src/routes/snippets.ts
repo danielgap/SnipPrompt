@@ -9,21 +9,21 @@ import {
   searchSnippets,
   updateSnippet
 } from '../controllers/snippets';
-import { requireBody } from '../middleware';
+import { requireBody, requireAuth, optionalAuth } from '../middleware';
 
 export const snippetRouter = Router();
 
 snippetRouter
   .route('/')
-  .post(requireBody('title', 'language', 'code'), createSnippet)
-  .get(getAllSnippets);
+  .post(requireAuth, requireBody('title', 'language', 'code'), createSnippet)
+  .get(optionalAuth, getAllSnippets);
 
 snippetRouter
   .route('/:id')
-  .get(getSnippet)
-  .put(updateSnippet)
-  .delete(deleteSnippet);
+  .get(optionalAuth, getSnippet)
+  .put(requireAuth, updateSnippet)
+  .delete(requireAuth, deleteSnippet);
 
 snippetRouter.route('/statistics/count').get(countTags);
-snippetRouter.route('/raw/:id').get(getRawCode);
-snippetRouter.route('/search').post(searchSnippets);
+snippetRouter.route('/raw/:id').get(optionalAuth, getRawCode);
+snippetRouter.route('/search').post(optionalAuth, searchSnippets);

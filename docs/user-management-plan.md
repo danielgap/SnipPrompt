@@ -70,30 +70,30 @@ Problemas encontrados:
 ## 🗓️ SEMANA 2: Backend - Middleware y Controllers Actualizados
 
 ### ✅ Tareas Completadas
-- [ ] **2.1 Middleware de Autenticación**
-  - [ ] Crear `src/middleware/auth.ts` con:
-    - [ ] `requireAuth` - Verificación de JWT con Express v4.21.2
-    - [ ] `optionalAuth` - Auth opcional para rutas públicas
-  - [ ] Actualizar `src/middleware/index.ts` para exportar nuevos middlewares
-  - [ ] ⚠️ Usar jsonwebtoken versión sin vulnerabilidades
+- [x] **2.1 Middleware de Autenticación**
+  - [x] Crear `src/middleware/auth.ts` con:
+    - [x] `requireAuth` - Verificación de JWT con Express v4.21.2
+    - [x] `optionalAuth` - Auth opcional para rutas públicas
+  - [x] Actualizar `src/middleware/index.ts` para exportar nuevos middlewares
+  - [x] ⚠️ Usar jsonwebtoken versión sin vulnerabilidades
 
-- [ ] **2.2 Rutas de Autenticación**
-  - [ ] Crear `src/routes/auth.ts`
-  - [ ] Integrar en `src/server.ts` como `/api/auth`
-  - [ ] Configurar validaciones con `requireBody`
-  - [ ] Rate limiting para prevenir ataques de fuerza bruta
+- [x] **2.2 Rutas de Autenticación**
+  - [x] Crear `src/routes/auth.ts`
+  - [x] Integrar en `src/server.ts` como `/api/auth`
+  - [x] Configurar validaciones con `requireBody`
+  - [ ] Rate limiting para prevenir ataques de fuerza bruta (Pendiente para hardening final)
 
-- [ ] **2.3 Actualizar Controller de Snippets**
-  - [ ] Modificar `getAllSnippets` para filtrar por `userId`
-  - [ ] Modificar `createSnippet` para incluir `userId` automáticamente
-  - [ ] Añadir validación de propiedad en `updateSnippet` y `deleteSnippet`
-  - [ ] Mantener funcionalidad existente para snippets sin usuario (retrocompatibilidad)
+- [x] **2.3 Actualizar Controller de Snippets**
+  - [x] Modificar `getAllSnippets` para filtrar por `userId`
+  - [x] Modificar `createSnippet` para incluir `userId` automáticamente
+  - [x] Añadir validación de propiedad en `updateSnippet` y `deleteSnippet`
+  - [x] Mantener funcionalidad existente para snippets sin usuario (retrocompatibilidad)
 
-- [ ] **2.4 Configuración JWT**
-  - [ ] Crear `src/config/auth.ts` para configuración de tokens
-  - [ ] Variables de entorno para JWT_SECRET
-  - [ ] Configurar expiración de tokens (15 minutos recomendado)
-  - [ ] ⚠️ Usar secrets criptográficamente seguros
+- [x] **2.4 Configuración JWT**
+  - [x] Crear `src/config/auth.ts` para configuración de tokens
+  - [x] Variables de entorno para JWT_SECRET
+  - [x] Configurar expiración de tokens (15 minutos recomendado)
+  - [x] ⚠️ Usar secrets criptográficamente seguros
 
 ### 📝 Notas de Implementación Semana 2
 ```
