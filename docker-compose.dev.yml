@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      target: backend
+    container_name: snipprompt-backend-dev
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+      - node_modules_backend:/app/node_modules
+      - ./data:/app/data
+    environment:
+      - NODE_ENV=development
+      - JWT_SECRET=${JWT_SECRET:-development_secret_change_in_production}
+      - JWT_EXPIRES_IN=${JWT_EXPIRES_IN:-15m}
+    command: npm run dev:server
+    networks:
+      - snipprompt-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      target: frontend
+    container_name: snipprompt-frontend-dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/app
+      - node_modules_frontend:/app/node_modules
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000/api
+      - CHOKIDAR_USEPOLLING=true
+    command: npm start
+    networks:
+      - snipprompt-network
+    depends_on:
+      - backend
+
+networks:
+  snipprompt-network:
+    driver: bridge
+
+volumes:
+  node_modules_backend:
+  node_modules_frontend: 
