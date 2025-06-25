@@ -2,7 +2,7 @@ version: '3'
 services:
   snippet-box:
     image: pawelmalak/snippet-box
-    container_name: snippet-box
+    container_name: SnipPrompt
     volumes:
       - /path/to/host/data:/app/data
     ports:
