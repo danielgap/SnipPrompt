@@ -51,15 +51,29 @@ module.exports = {
       return webpackConfig;
     }
   },
-  devServer: {
-    setupMiddlewares: (middlewares, devServer) => {
-      // Migración de onBeforeSetupMiddleware y onAfterSetupMiddleware
-      if (!devServer) {
-        throw new Error('webpack-dev-server is not defined');
+  devServer: (devServerConfig, { env, paths, proxy, allowedHost }) => {
+    // Configuración completa para webpack-dev-server moderna
+    return {
+      ...devServerConfig,
+      // Usar la nueva API setupMiddlewares en lugar de las deprecadas
+      setupMiddlewares: (middlewares, devServer) => {
+        if (!devServer) {
+          throw new Error('webpack-dev-server is not defined');
+        }
+        
+        // Aquí se pueden agregar middlewares personalizados
+        return middlewares;
+      },
+      // Asegurar que las opciones deprecadas no se usen
+      onBeforeSetupMiddleware: undefined,
+      onAfterSetupMiddleware: undefined,
+      // Configuraciones adicionales para suprimir warnings
+      client: {
+        overlay: {
+          errors: true,
+          warnings: false
+        }
       }
-      
-      // Aquí se pueden agregar middlewares personalizados si es necesario
-      return middlewares;
-    }
+    };
   }
 }; 

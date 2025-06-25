@@ -5,3 +5,11 @@
 .cursor-pointer:hover {
   cursor: pointer;
 }
+
+/* Fix autoprefixer warning: Suppress color-adjust deprecation from Bootstrap */
+@media print {
+  *, *::before, *::after {
+    print-color-adjust: exact !important;
+    color-adjust: unset !important;
+  }
+}
