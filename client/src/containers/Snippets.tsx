@@ -14,7 +14,7 @@ export const Snippets = (): JSX.Element => {
   useEffect(() => {
     getSnippets();
     countTags();
-  }, []);
+  }, [getSnippets, countTags]);
 
   useEffect(() => {
     setLocalSnippets([...snippets]);

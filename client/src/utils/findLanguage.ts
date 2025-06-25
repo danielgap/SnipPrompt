@@ -1,4 +1,5 @@
-import { aliases } from '../data/aliases_raw.json';
+import aliasesData from '../data/aliases_raw.json';
+const aliases = aliasesData.aliases;
 
 export const findLanguage = (language: string): boolean => {
   const search = language.toLowerCase();

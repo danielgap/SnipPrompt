@@ -9,7 +9,7 @@ export const Home = (): JSX.Element => {
 
   useEffect(() => {
     getSnippets();
-  }, []);
+  }, [getSnippets]);
 
   return (
     <Layout>

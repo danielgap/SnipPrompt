@@ -24,9 +24,9 @@
     "typescript": "^4.4.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -49,6 +49,15 @@
   },
   "proxy": "http://localhost:5000",
   "devDependencies": {
-    "purgecss": "^4.0.3"
+    "@craco/craco": "^7.1.0",
+    "assert": "^2.1.0",
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.1",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10",
+    "purgecss": "^4.0.3",
+    "stream-browserify": "^3.0.0",
+    "util": "^0.12.5"
   }
 }

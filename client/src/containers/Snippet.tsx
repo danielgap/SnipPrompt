@@ -20,7 +20,7 @@ export const Snippet = (): JSX.Element => {
 
   useEffect(() => {
     getSnippetById(+id);
-  }, []);
+  }, [getSnippetById, id]);
 
   return (
     <Layout>
