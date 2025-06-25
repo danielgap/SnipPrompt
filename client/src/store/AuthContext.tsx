@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import api from '../utils/api';
 import { User } from '../typescript/interfaces';
 
@@ -45,7 +45,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const validateToken = async () => {
       if (token) {
         try {
-          const decoded: DecodedToken = jwt_decode(token);
+          const decoded: DecodedToken = jwtDecode(token);
           // Comprobar si el token ha expirado
           if (decoded.exp * 1000 < Date.now()) {
             logout();

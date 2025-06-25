@@ -5,6 +5,7 @@ export interface Context {
   searchResults: Snippet[];
   currentSnippet: Snippet | null;
   tagCount: TagCount[];
+  loading: boolean;
   getSnippets: () => void;
   getSnippetById: (id: number) => void;
   setSnippet: (id: number) => void;

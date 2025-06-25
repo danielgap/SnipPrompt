@@ -4,14 +4,19 @@ import { ErrorResponse, Logger } from '../utils';
 const logger = new Logger('errorHandler');
 
 export const errorHandler = (
-  err: ErrorResponse,
+  err: any,
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  logger.log(err.message, 'ERROR');
+  console.error(err);
 
-  res.status(err.statusCode || 500).json({
-    error: err.message || 'Internal Server Error'
+  const statusCode = err.statusCode || 500;
+  const message = err.message || 'Internal Server Error';
+  
+  logger.log(message, 'ERROR');
+
+  res.status(statusCode).json({
+    error: message
   });
 };

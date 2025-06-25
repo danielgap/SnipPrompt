@@ -7,7 +7,6 @@ import { errorHandler } from './middleware';
 
 // Routers
 import { snippetRouter } from './routes/snippets';
-import { associateModels } from './db/associateModels';
 import { authRoutes } from './routes/auth';
 
 // Env config
@@ -35,7 +34,6 @@ app.use(errorHandler);
 
 (async () => {
   await connectDB();
-  await associateModels();
 
   app.listen(PORT, () => {
     logger.log(

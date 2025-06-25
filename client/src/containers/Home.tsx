@@ -1,15 +1,24 @@
-import { useEffect, useContext, Fragment } from 'react';
+import React, { useContext, useEffect, Fragment } from 'react';
 import { SnippetsContext } from '../store';
 import { Layout, PageHeader, EmptyState } from '../components/UI';
 import { SnippetGrid } from '../components/Snippets/SnippetGrid';
 import { SearchBar } from '../components/SearchBar';
 
-export const Home = (): JSX.Element => {
-  const { snippets, getSnippets, searchResults } = useContext(SnippetsContext);
+export const Home = () => {
+  const { snippets, getSnippets, loading, searchResults } = useContext(SnippetsContext);
 
   useEffect(() => {
     getSnippets();
-  }, [getSnippets]);
+    // eslint-disable-next-line
+  }, []);
+
+  if (loading) {
+    return (
+      <Layout>
+        <PageHeader title='Cargando...' />
+      </Layout>
+    );
+  }
 
   return (
     <Layout>

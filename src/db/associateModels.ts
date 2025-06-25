@@ -1,6 +1,6 @@
 import { TagModel, SnippetModel, Snippet_TagModel, UserModel } from '../models';
 
-export const associateModels = async () => {
+export const associateModels = () => {
   // Relaciones User-Snippet
   UserModel.hasMany(SnippetModel, {
     foreignKey: 'userId',

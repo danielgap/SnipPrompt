@@ -19,9 +19,9 @@ const umzug = new Umzug({
     params: [sequelize.getQueryInterface()],
     pattern: /^\d+[\w-]+\.(js|ts)$/
   },
-  storage: 'sequelize',
+  storage: 'json',
   storageOptions: {
-    sequelize
+    path: path.join(__dirname, '../../migrations-meta.json')
   },
   logging: false
 });
@@ -48,6 +48,12 @@ export const connectDB = async () => {
     }
 
     await umzug.up();
+    
+    // ASOCIAR MODELOS DESPUÉS DE MIGRACIONES
+    const { associateModels } = require('./associateModels');
+    associateModels();
+    logger.log('Models associated successfully');
+
   } catch (err) {
     logger.log(`Database connection error`, 'ERROR');
 

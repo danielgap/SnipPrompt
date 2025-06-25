@@ -31,6 +31,16 @@ export const up = async (queryInterface: QueryInterface): Promise<void> => {
       allowNull: true,
       defaultValue: ''
     },
+    userId: {
+      type: INTEGER,
+      allowNull: true,
+      references: {
+        model: 'users',
+        key: 'id'
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'SET NULL'
+    },
     createdAt: {
       type: DATE,
       allowNull: false

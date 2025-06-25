@@ -15,7 +15,7 @@ services:
       - NODE_ENV=development
       - JWT_SECRET=development_secret_change_in_production
       - JWT_EXPIRES_IN=15m
-    command: sh -c "npm install && npm install -g nodemon ts-node && npm run dev:server"
+    command: sh -c "rm -f /app/data/db.sqlite3 && npm install && npm install -g nodemon ts-node && npm run dev:server"
     networks:
       - snipprompt-network
 
@@ -28,9 +28,10 @@ services:
     volumes:
       - ./client:/app
     environment:
-      - REACT_APP_API_URL=http://localhost:5000/api
+      - REACT_APP_API_URL=http://backend:5000/api
       - CHOKIDAR_USEPOLLING=true
       - npm_config_unsafe_perm=true
+      - ESLINT_NO_CACHE=true
     command: sh -c "npm install --cache=/tmp/.npm && npm start"
     networks:
       - snipprompt-network
