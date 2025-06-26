@@ -1,4 +1,4 @@
-# 🛠️ Configuración de Entorno de Desarrollo - SnipPrompt
+# 🛠️ Configuración de Entorno de Desarrollo - SnippetBox2
 
 ## 🚀 Reglas de Desarrollo del Proyecto
 
@@ -28,7 +28,7 @@
 ```bash
 # 1. Clonar repositorio
 git clone <repository-url>
-cd SnipPrompt
+cd SnippetBox2
 
 # 2. Crear archivo de variables de entorno
 cp .env.example .env
@@ -60,7 +60,7 @@ docker-compose -f docker-compose.dev.yml up --build
 ## 📁 **Estructura de Archivos Docker**
 
 ```
-SnipPrompt/
+SnippetBox2/
 ├── Dockerfile                  # Producción
 ├── Dockerfile.dev             # Desarrollo
 ├── docker-compose.yml         # Producción

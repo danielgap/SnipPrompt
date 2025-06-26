@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# 🚀 Script de Inicio Rápido - SnipPrompt Development
+# 🚀 Script de Inicio Rápido - SnippetBox2 Development
 # =====================================================
 
-echo "🐳 Iniciando SnipPrompt en modo desarrollo..."
+echo "🐳 Iniciando SnippetBox2 en modo desarrollo..."
 
 # Verificar si Docker está funcionando
 if ! docker --version > /dev/null 2>&1; then
@@ -60,14 +60,14 @@ docker-compose -f docker-compose.working.yml down -v 2>/dev/null
 
 # Limpiar contenedores específicos por nombre (más agresivo)
 echo "🔧 Eliminando contenedores específicos..."
-docker rm -f snipprompt-backend-dev 2>/dev/null || true
-docker rm -f snipprompt-frontend-dev 2>/dev/null || true
-docker rm -f cbf1a91be57200abefc2891b173078e4191dc3408af5e8e0b1912c7290b55b0a-snipprompt-backend-dev-1 2>/dev/null || true
-docker rm -f cbf1a91be57200abefc2891b173078e4191dc3408af5e8e0b1912c7290b55b0a-snipprompt-frontend-dev-1 2>/dev/null || true
+docker rm -f SnippetBox2-backend-dev 2>/dev/null || true
+docker rm -f SnippetBox2-frontend-dev 2>/dev/null || true
+docker rm -f cbf1a91be57200abefc2891b173078e4191dc3408af5e8e0b1912c7290b55b0a-SnippetBox2-backend-dev-1 2>/dev/null || true
+docker rm -f cbf1a91be57200abefc2891b173078e4191dc3408af5e8e0b1912c7290b55b0a-SnippetBox2-frontend-dev-1 2>/dev/null || true
 
-# Limpiar contenedores que contengan "snipprompt" en el nombre
-echo "🗑️  Eliminando todos los contenedores relacionados con snipprompt..."
-docker ps -a --filter "name=snipprompt" --format "{{.ID}}" | xargs -r docker rm -f 2>/dev/null || true
+# Limpiar contenedores que contengan "SnippetBox2" en el nombre
+echo "🗑️  Eliminando todos los contenedores relacionados con SnippetBox2..."
+docker ps -a --filter "name=SnippetBox2" --format "{{.ID}}" | xargs -r docker rm -f 2>/dev/null || true
 
 # Limpiar redes huérfanas
 echo "🌐 Limpiando redes..."
@@ -100,6 +100,6 @@ docker-compose -f docker-compose.working.yml up --build
 
 # El script se ejecuta hasta que se pare docker-compose
 echo ""
-echo "🛑 SnipPrompt detenido"
+echo "🛑 SnippetBox2 detenido"
 echo "💡 Para reiniciar: ./start-dev.sh"
 echo "💡 Para limpiar: docker-compose -f docker-compose.working.yml down -v" 

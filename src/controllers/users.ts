@@ -4,14 +4,14 @@ import { ErrorResponse } from '../utils';
 import { asyncWrapper } from '../middleware';
 import { UserPublicAttributes } from '../typescript/interfaces';
 
-// Función utilitaria para crear respuesta de usuario sin password
+// Utility function to create user response without password
 const createUserResponse = (user: any): UserPublicAttributes => {
   const { password, ...userWithoutPassword } = user.toJSON();
   return userWithoutPassword;
 };
 
 /**
- * @desc    Obtener todos los usuarios
+ * @desc    Get all users
  * @route   GET /api/users
  * @access  Private (Admin)
  */
@@ -30,7 +30,7 @@ export const getAllUsers = asyncWrapper(
 );
 
 /**
- * @desc    Eliminar un usuario
+ * @desc    Delete a user
  * @route   DELETE /api/users/:id
  * @access  Private (Admin)
  */
@@ -38,28 +38,28 @@ export const deleteUser = asyncWrapper(
   async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const userId = req.params.id;
 
-    // Evitar que un admin se elimine a sí mismo
+    // Prevent an admin from deleting themselves
     if (req.user && req.user.id.toString() === userId) {
-      return next(new ErrorResponse(400, 'No puedes eliminar tu propia cuenta de administrador.'));
+      return next(new ErrorResponse(400, 'You cannot delete your own administrator account.'));
     }
 
     const user = await User.findByPk(userId);
 
     if (!user) {
-      return next(new ErrorResponse(404, `Usuario no encontrado con id ${userId}`));
+      return next(new ErrorResponse(404, `User not found with id ${userId}`));
     }
 
     await user.destroy();
 
     res.status(200).json({
       success: true,
-      message: 'Usuario eliminado correctamente.'
+      message: 'User deleted successfully.'
     });
   }
 );
 
 /**
- * @desc    Promover un usuario a administrador
+ * @desc    Promote a user to admin
  * @route   PUT /api/users/:id/promote
  * @access  Private (Admin)
  */
@@ -68,7 +68,7 @@ export const promoteUser = asyncWrapper(
     const user = await User.findByPk(req.params.id);
 
     if (!user) {
-      return next(new ErrorResponse(404, `Usuario no encontrado con id ${req.params.id}`));
+      return next(new ErrorResponse(404, `User not found with id ${req.params.id}`));
     }
 
     user.role = 'admin';
@@ -76,14 +76,14 @@ export const promoteUser = asyncWrapper(
 
     res.status(200).json({
       success: true,
-      message: 'Usuario promovido a administrador.',
+      message: 'User promoted to administrator.',
       data: createUserResponse(user)
     });
   }
 );
 
 /**
- * @desc    Degradar un administrador a usuario
+ * @desc    Demote an admin to user
  * @route   PUT /api/users/:id/demote
  * @access  Private (Admin)
  */
@@ -91,15 +91,15 @@ export const demoteUser = asyncWrapper(
   async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const userId = req.params.id;
 
-    // Evitar que un admin se degrade a sí mismo
+    // Prevent an admin from demoting themselves
     if (req.user && req.user.id.toString() === userId) {
-      return next(new ErrorResponse(400, 'No puedes cambiar tu propio rol de administrador.'));
+      return next(new ErrorResponse(400, 'You cannot change your own administrator role.'));
     }
 
     const user = await User.findByPk(userId);
 
     if (!user) {
-      return next(new ErrorResponse(404, `Usuario no encontrado con id ${userId}`));
+      return next(new ErrorResponse(404, `User not found with id ${userId}`));
     }
 
     user.role = 'user';
@@ -107,7 +107,7 @@ export const demoteUser = asyncWrapper(
 
     res.status(200).json({
       success: true,
-      message: 'Administrador degradado a usuario.',
+      message: 'Administrator demoted to user.',
       data: createUserResponse(user)
     });
   }

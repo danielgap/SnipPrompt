@@ -1,8 +1,8 @@
-# 🔒 Script de Verificación de Seguridad - SnipPrompt
+# 🔒 Script de Verificación de Seguridad - SnippetBox2
 # Fecha: 25/06/2025
 # Compatible con Windows PowerShell
 
-Write-Host "🔍 Verificando estado de seguridad de SnipPrompt..." -ForegroundColor Cyan
+Write-Host "🔍 Verificando estado de seguridad de SnippetBox2..." -ForegroundColor Cyan
 Write-Host ""
 
 # Verificar estructura del proyecto

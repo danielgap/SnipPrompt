@@ -17,7 +17,7 @@ const AdminUsers = () => {
       setUsers(response.data.data);
       setError(null);
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Error al cargar los usuarios.');
+      setError(err.response?.data?.message || 'Error fetching users.');
       console.error(err);
     } finally {
       setLoading(false);
@@ -33,13 +33,13 @@ const AdminUsers = () => {
       await action();
       fetchUsers();
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Ocurrió un error al realizar la acción.');
+      setError(err.response?.data?.message || 'An error occurred while performing the action.');
       console.error(err);
     }
   };
 
   const handleDelete = (userId: number) => {
-    if (window.confirm('¿Estás seguro de que quieres eliminar este usuario? Esta acción es irreversible.')) {
+    if (window.confirm('Are you sure you want to delete this user? This action is irreversible.')) {
       handleAction(() => api.delete(`/users/${userId}`));
     }
   };
@@ -53,7 +53,7 @@ const AdminUsers = () => {
   };
 
   if (loading) {
-    return <p>Cargando usuarios...</p>;
+    return <p>Loading users...</p>;
   }
 
   if (error) {
@@ -62,16 +62,16 @@ const AdminUsers = () => {
 
   return (
     <div>
-      <PageHeader title="Gestión de Usuarios" />
+      <PageHeader title="User Management" />
       <table className="table table-striped">
         <thead>
           <tr>
             <th>ID</th>
             <th>Username</th>
             <th>Email</th>
-            <th>Rol</th>
-            <th>Activo</th>
-            <th>Acciones</th>
+            <th>Role</th>
+            <th>Active</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -81,20 +81,20 @@ const AdminUsers = () => {
               <td>{user.username}</td>
               <td>{user.email}</td>
               <td>{user.role}</td>
-              <td>{user.isActive ? 'Sí' : 'No'}</td>
+              <td>{user.isActive ? 'Yes' : 'No'}</td>
               <td>
                 <div className="btn-group" role="group">
                   {user.role !== 'admin' ? (
                     <button className="btn btn-sm btn-success" onClick={() => handlePromote(user.id)}>
-                      Promover
+                      Promote
                     </button>
                   ) : (
                     <button className="btn btn-sm btn-warning" onClick={() => handleDemote(user.id)} disabled={currentUser?.id === user.id}>
-                      Degradar
+                      Demote
                     </button>
                   )}
                   <button className="btn btn-sm btn-danger" onClick={() => handleDelete(user.id)} disabled={currentUser?.id === user.id}>
-                    Eliminar
+                    Delete
                   </button>
                 </div>
               </td>

@@ -1,4 +1,4 @@
-# 📋 Plan de Implementación: Gestión de Usuarios - SnipPrompt
+# 📋 Plan de Implementación: Gestión de Usuarios - SnippetBox2
 
 ## 🎯 Objetivo
 Implementar un sistema de autenticación y autorización para que cada usuario tenga sus propios snippets privados, manteniendo la simplicidad y consistencia del proyecto existente.

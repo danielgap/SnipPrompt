@@ -1,10 +1,10 @@
-# SnipPrompt
+# SnippetBox2
 
 ![Snippet library screenshot](./.github/img/snippets.png)
 
 ## Description
 
-SnipPrompt is a simple self-hosted app for organizing your code snippets. It allows you to easily create, edit, browse and manage your snippets in various languages. With built-in Markdown support, SnipPrompt makes it very easy to add notes or simple documentation to your code.
+SnippetBox2 is a simple self-hosted app for organizing your code snippets. It allows you to easily create, edit, browse and manage your snippets in various languages. With built-in Markdown support, SnippetBox2 makes it very easy to add notes or simple documentation to your code.
 
 ## Technology
 
@@ -25,7 +25,7 @@ SnipPrompt is a simple self-hosted app for organizing your code snippets. It all
 ```sh
 # clone repository
 git clone https://github.com/pawelmalak/snippet-box
-cd SnipPrompt
+cd SnippetBox2
 
 # install dependencies (run only once)
 npm run init
@@ -47,21 +47,21 @@ For arm platforms use `:arm` tag.
 
 ```sh
 # Building image for Linux
-docker build -t SnipPrompt .
+docker build -t SnippetBox2 .
 
 # Build image for ARM
 docker buildx build \
   --platform linux/arm/v7,linux/arm64 \
   -f Dockerfile.arm \
-  -t SnipPrompt:arm .
+  -t SnippetBox2:arm .
 ```
 
 #### Deployment
 
 ```sh
 # run container
-# for ARM use SnipPrompt:arm tag
-docker run -p 5000:5000 -v /path/to/data:/app/data SnipPrompt
+# for ARM use SnippetBox2:arm tag
+docker run -p 5000:5000 -v /path/to/data:/app/data SnippetBox2
 ```
 
 #### Docker Compose
@@ -71,7 +71,7 @@ version: '3'
 services:
   snippet-box:
     image: pawelmalak/snippet-box:latest
-    container_name: SnipPrompt
+    container_name: SnippetBox2
     volumes:
       - /path/to/host/data:/app/data
     ports:

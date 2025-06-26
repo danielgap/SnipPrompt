@@ -1,27 +1,27 @@
-# Documentación de API - Gestión de Usuarios
+# API Documentation - User Management
 
-**Proyecto:** SnipPrompt  
-**Versión:** 1.0  
-**Fecha:** 26 de Enero de 2025
+**Project:** SnippetBox2  
+**Version:** 1.0  
+**Date:** January 26, 2025
 
-## Resumen
+## Summary
 
-Esta sección documenta los endpoints de la API para la gestión de usuarios. Todas estas rutas están protegidas y requieren que el solicitante sea un **administrador autenticado**.
+This section documents the API endpoints for user management. All these routes are protected and require the requester to be an **authenticated administrator**.
 
-**Prefijo de la Ruta:** `/api/users`  
-**Autenticación Requerida:** `Bearer <token>`  
-**Permisos Requeridos:** `role: 'admin'`
+**Route Prefix:** `/api/users`  
+**Authentication Required:** `Bearer <token>`  
+**Permissions Required:** `role: 'admin'`
 
 ---
 
 ## Endpoints
 
-### 1. Obtener todos los usuarios
+### 1. Get all users
 
-- **Método:** `GET`
-- **Ruta:** `/`
-- **Descripción:** Devuelve una lista de todos los usuarios registrados en el sistema. La contraseña del usuario se excluye de la respuesta.
-- **Respuesta Exitosa (200 OK):**
+- **Method:** `GET`
+- **Route:** `/`
+- **Description:** Returns a list of all registered users in the system. The user's password is excluded from the response.
+- **Successful Response (200 OK):**
   ```json
   {
     "success": true,
@@ -48,67 +48,67 @@ Esta sección documenta los endpoints de la API para la gestión de usuarios. To
     ]
   }
   ```
-- **Respuesta de Error:**
-  - `401 Unauthorized`: Si el token no es válido o no se proporciona.
-  - `403 Forbidden`: Si el usuario no es un administrador.
+- **Error Response:**
+  - `401 Unauthorized`: If the token is invalid or not provided.
+  - `403 Forbidden`: If the user is not an administrator.
 
-### 2. Eliminar un usuario
+### 2. Delete a user
 
-- **Método:** `DELETE`
-- **Ruta:** `/:id`
-- **Descripción:** Elimina permanentemente a un usuario por su ID. Un administrador no puede eliminarse a sí mismo.
-- **Parámetros de URL:**
-  - `id` (number): El ID del usuario a eliminar.
-- **Respuesta Exitosa (200 OK):**
+- **Method:** `DELETE`
+- **Route:** `/:id`
+- **Description:** Permanently deletes a user by their ID. An administrator cannot delete themselves.
+- **URL Parameters:**
+  - `id` (number): The ID of the user to delete.
+- **Successful Response (200 OK):**
   ```json
   {
     "success": true,
-    "message": "Usuario eliminado correctamente."
+    "message": "User deleted successfully."
   }
   ```
-- **Respuesta de Error:**
-  - `400 Bad Request`: Si un administrador intenta eliminarse a sí mismo.
-  - `401 Unauthorized`: Autenticación fallida.
-  - `403 Forbidden`: El usuario no es administrador.
-  - `404 Not Found`: Si el usuario con el `id` especificado no existe.
+- **Error Response:**
+  - `400 Bad Request`: If an administrator tries to delete themselves.
+  - `401 Unauthorized`: Authentication failed.
+  - `403 Forbidden`: The user is not an administrator.
+  - `404 Not Found`: If the user with the specified `id` does not exist.
 
-### 3. Promover un usuario a administrador
+### 3. Promote a user to administrator
 
-- **Método:** `PUT`
-- **Ruta:** `/:id/promote`
-- **Descripción:** Cambia el rol de un usuario de `'user'` a `'admin'`.
-- **Parámetros de URL:**
-  - `id` (number): El ID del usuario a promover.
-- **Respuesta Exitosa (200 OK):**
+- **Method:** `PUT`
+- **Route:** `/:id/promote`
+- **Description:** Changes a user's role from `'user'` to `'admin'`.
+- **URL Parameters:**
+  - `id` (number): The ID of the user to promote.
+- **Successful Response (200 OK):**
   ```json
   {
     "success": true,
-    "message": "Usuario promovido a administrador.",
-    "data": { ...objeto del usuario actualizado... }
+    "message": "User promoted to administrator.",
+    "data": { ...updated user object... }
   }
   ```
-- **Respuesta de Error:**
-  - `401 Unauthorized`: Autenticación fallida.
-  - `403 Forbidden`: El usuario no es administrador.
-  - `404 Not Found`: Usuario no encontrado.
+- **Error Response:**
+  - `401 Unauthorized`: Authentication failed.
+  - `403 Forbidden`: The user is not an administrator.
+  - `404 Not Found`: User not found.
 
-### 4. Degradar un administrador a usuario
+### 4. Demote an administrator to user
 
-- **Método:** `PUT`
-- **Ruta:** `/:id/demote`
-- **Descripción:** Cambia el rol de un administrador de `'admin'` a `'user'`. Un administrador no puede degradarse a sí mismo.
-- **Parámetros de URL:**
-  - `id` (number): El ID del administrador a degradar.
-- **Respuesta Exitosa (200 OK):**
+- **Method:** `PUT`
+- **Route:** `/:id/demote`
+- **Description:** Changes an administrator's role from `'admin'` to `'user'`. An administrator cannot demote themselves.
+- **URL Parameters:**
+  - `id` (number): The ID of the administrator to demote.
+- **Successful Response (200 OK):**
   ```json
   {
     "success": true,
-    "message": "Administrador degradado a usuario.",
-    "data": { ...objeto del usuario actualizado... }
+    "message": "Administrator demoted to user.",
+    "data": { ...updated user object... }
   }
   ```
-- **Respuesta de Error:**
-  - `400 Bad Request`: Si un administrador intenta degradarse a sí mismo.
-  - `401 Unauthorized`: Autenticación fallida.
-  - `403 Forbidden`: El usuario no es administrador.
-  - `404 Not Found`: Usuario no encontrado. 
+- **Error Response:**
+  - `400 Bad Request`: If an administrator tries to demote themselves.
+  - `401 Unauthorized`: Authentication failed.
+  - `403 Forbidden`: The user is not an administrator.
+  - `404 Not Found`: User not found. 

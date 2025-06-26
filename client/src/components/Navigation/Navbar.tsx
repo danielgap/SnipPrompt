@@ -16,11 +16,14 @@ export const Navbar = () => {
         </li>
       )}
       <li className="nav-item">
-        <span className="nav-link">Hola, {user?.username}</span>
+        <span className="nav-link">
+          Hello, {user?.username}
+          {isUserAdmin && <span className="badge badge-success ml-2">Admin</span>}
+        </span>
       </li>
       <li className="nav-item">
         <button className="btn btn-link nav-link" onClick={logout}>
-          Salir
+          Logout
         </button>
       </li>
     </Fragment>
@@ -30,12 +33,12 @@ export const Navbar = () => {
     <Fragment>
       <li className="nav-item">
         <NavLink to="/register" className="nav-link">
-          Registro
+          Register
         </NavLink>
       </li>
       <li className="nav-item">
         <NavLink to="/login" className="nav-link">
-          Entrar
+          Login
         </NavLink>
       </li>
     </Fragment>
@@ -45,7 +48,7 @@ export const Navbar = () => {
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container">
         <NavLink to="/" className="navbar-brand">
-          SnipPrompt
+          SnippetBox2
         </NavLink>
         <button
           className="navbar-toggler"

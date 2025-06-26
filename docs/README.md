@@ -1,4 +1,4 @@
-# 📚 Documentación del Proyecto SnipPrompt
+# 📚 Documentación del Proyecto SnippetBox2
 
 ## 🔒 **ALERTA DE SEGURIDAD CRÍTICA**
 **Estado**: 🔴 **CRÍTICO** - 211 vulnerabilidades detectadas (19 críticas)  
@@ -26,7 +26,7 @@
 
 ---
 
-Esta carpeta contiene toda la documentación relacionada con el desarrollo y mantenimiento del proyecto SnipPrompt.
+Esta carpeta contiene toda la documentación relacionada con el desarrollo y mantenimiento del proyecto SnippetBox2.
 
 ## 📁 Estructura de Documentación
 

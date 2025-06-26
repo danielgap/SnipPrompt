@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 🔧 Script para Arreglar Permisos - SnipPrompt
+# 🔧 Script para Arreglar Permisos - SnippetBox2
 # =============================================
 
 echo "🔧 Arreglando problema de permisos del frontend..."
@@ -33,5 +33,5 @@ echo "🏗️  Iniciando con configuración de permisos arreglada..."
 docker-compose -f docker-compose.working.yml up --build
 
 echo ""
-echo "🛑 SnipPrompt detenido"
+echo "🛑 SnippetBox2 detenido"
 echo "💡 Si el problema persiste, ejecuta: docker system prune -a" 

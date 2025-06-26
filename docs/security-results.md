@@ -111,7 +111,7 @@ Reducción: 94.9% (177 → 9) ✅
 
 ## 🎖️ **CERTIFICACIÓN DE SEGURIDAD**
 
-> **SnipPrompt se considera SEGURO para uso en producción**  
+> **SnippetBox2 se considera SEGURO para uso en producción**  
 > Todas las vulnerabilidades críticas y de alto riesgo han sido eliminadas.  
 > Las 9 vulnerabilidades restantes no afectan el entorno de producción.
 >

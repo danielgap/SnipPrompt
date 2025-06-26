@@ -1,10 +1,14 @@
-version: '3'
+version: '3.8'
+
 services:
-  snippet-box:
-    image: pawelmalak/snippet-box
-    container_name: SnipPrompt
-    volumes:
-      - /path/to/host/data:/app/data
+  snippetbox2:
+    build: .
+    container_name: SnippetBox2
     ports:
-      - 5000:5000
+      - "5000:5000"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - NODE_ENV=production
+      - JWT_SECRET=sW5HGd*dsaW_dSb_s3_sgrN0sw_yUpO
     restart: unless-stopped

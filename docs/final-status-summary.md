@@ -1,4 +1,4 @@
-# 🎯 Estado Final del Proyecto SnipPrompt
+# 🎯 Estado Final del Proyecto SnippetBox2
 
 ## 🎯 **RESUMEN EJECUTIVO**
 **Estado**: ✅ **PROYECTO LISTO PARA DESARROLLO PRODUCTIVO**  
@@ -61,8 +61,8 @@ webpack compiled with 3 warnings
 ## 🛠️ **INFRAESTRUCTURA TÉCNICA**
 
 ### Docker Environment ✅
-- **Backend**: `snipprompt-backend-dev` - Puerto 5000
-- **Frontend**: `snipprompt-frontend-dev` - Puerto 3000
+- **Backend**: `SnippetBox2-backend-dev` - Puerto 5000
+- **Frontend**: `SnippetBox2-frontend-dev` - Puerto 3000
 - **Base de datos**: SQLite conectada y funcional
 - **Configuración**: `docker-compose.working.yml` estable
 
@@ -155,4 +155,4 @@ webpack compiled with 3 warnings
 📖 **Docs**: Documentación exhaustiva creada  
 🛣️ **Roadmap**: Plan claro para gestión usuarios  
 
-**CONCLUSIÓN**: El proyecto SnipPrompt está **COMPLETAMENTE PREPARADO** para continuar el desarrollo de gestión de usuarios con total confianza en la seguridad y estabilidad de la base de código. 
+**CONCLUSIÓN**: El proyecto SnippetBox2 está **COMPLETAMENTE PREPARADO** para continuar el desarrollo de gestión de usuarios con total confianza en la seguridad y estabilidad de la base de código. 

@@ -1,50 +1,50 @@
-# Guía del Administrador - SnipPrompt
+# Administrator's Guide - SnippetBox2
 
-## Introducción
+## Introduction
 
-¡Felicidades! Si estás leyendo esto, has sido designado como **Administrador** de SnipPrompt. Este rol te otorga capacidades especiales para gestionar la plataforma y sus usuarios.
+Congratulations! If you are reading this, you have been designated as an **Administrator** for SnippetBox2. This role grants you special capabilities to manage the platform and its users.
 
-Esta guía te explicará cómo acceder y utilizar tus privilegios.
-
----
-
-## 1. El Primer Administrador
-
-El sistema está diseñado para que **el primer usuario que se registre sea automáticamente un administrador**. Esto asegura que la plataforma siempre tenga al menos una persona con los permisos necesarios para empezar a gestionarla.
-
-## 2. Acceso al Panel de Administración
-
-Una vez que inicies sesión con tu cuenta de administrador, notarás un nuevo enlace en la barra de navegación principal llamado **"Admin"**.
-
-Haz clic en este enlace para acceder al **Panel de Gestión de Usuarios**.
-
-## 3. Gestión de Usuarios
-
-El panel de administración te presenta una tabla con todos los usuarios registrados en el sistema. Para cada usuario, puedes ver su ID, nombre de usuario, email, rol actual y si su cuenta está activa.
-
-Desde este panel, puedes realizar las siguientes acciones:
-
-### Promover a Administrador
-- **Botón:** `Promover` (verde)
-- **Acción:** Asigna el rol de `admin` a un usuario normal. Esto le dará acceso a este mismo panel y a todas las capacidades de administración.
-- **¿Cuándo usarlo?:** Cuando necesites delegar responsabilidades de administración a otro miembro de confianza del equipo.
-
-### Degradar a Usuario
-- **Botón:** `Degradar` (amarillo)
-- **Acción:** Revoca los privilegios de `admin` de una cuenta, devolviéndola al rol de `user` normal.
-- **Restricción:** No puedes degradarte a ti mismo. Esta acción debe ser realizada por otro administrador.
-
-### Eliminar Usuario
-- **Botón:** `Eliminar` (rojo)
-- **Acción:** **Elimina permanentemente** la cuenta de un usuario, junto con todos sus datos asociados. Esta acción es **irreversible**. Se te pedirá una confirmación antes de proceder.
-- **Restricción:** No puedes eliminar tu propia cuenta de administrador.
+This guide will explain how to access and use your privileges.
 
 ---
 
-## 4. Consideraciones de Seguridad
+## 1. The First Administrator
 
-- **Sé cuidadoso:** Las acciones de promover y eliminar tienen un gran impacto en la seguridad y los datos de la plataforma.
-- **Principio de mínimo privilegio:** Otorga permisos de administrador solo a quienes realmente los necesiten.
-- **No te auto-elimines:** El sistema previene que te elimines o degrades a ti mismo para evitar dejar la plataforma sin administradores.
+The system is designed so that **the first user who registers automatically becomes an administrator**. This ensures that the platform always has at least one person with the necessary permissions to start managing it.
 
-Si tienes alguna duda, contacta al equipo de soporte técnico. 
+## 2. Accessing the Admin Panel
+
+Once you log in with your administrator account, you will notice a new link in the main navigation bar called **"Admin"**.
+
+Click this link to access the **User Management Panel**.
+
+## 3. User Management
+
+The admin panel presents you with a table of all registered users in the system. For each user, you can see their ID, username, email, current role, and whether their account is active.
+
+From this panel, you can perform the following actions:
+
+### Promote to Administrator
+- **Button:** `Promote` (green)
+- **Action:** Assigns the `admin` role to a regular user. This will give them access to this same panel and all administrative capabilities.
+- **When to use it?:** When you need to delegate administrative responsibilities to another trusted team member.
+
+### Demote to User
+- **Button:** `Demote` (yellow)
+- **Action:** Revokes `admin` privileges from an account, returning it to the normal `user` role.
+- **Restriction:** You cannot demote yourself. This action must be performed by another administrator.
+
+### Delete User
+- **Button:** `Delete` (red)
+- **Action:** **Permanently deletes** a user's account, along with all their associated data. This action is **irreversible**. You will be asked for confirmation before proceeding.
+- **Restriction:** You cannot delete your own administrator account.
+
+---
+
+## 4. Security Considerations
+
+- **Be careful:** The actions of promoting and deleting have a major impact on the platform's security and data.
+- **Principle of least privilege:** Grant administrator permissions only to those who truly need them.
+- **Don't self-destruct:** The system prevents you from deleting or demoting yourself to avoid leaving the platform without administrators.
+
+If you have any questions, contact the technical support team. 

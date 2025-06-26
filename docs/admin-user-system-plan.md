@@ -1,6 +1,6 @@
 # Plan de Desarrollo: Sistema de Administración de Usuarios
 
-**Proyecto:** SnipPrompt  
+**Proyecto:** SnippetBox2  
 **Fecha de Inicio:** 26 de Enero de 2025  
 **Responsable:** Desarrollador Principal  
 **Estimación Total:** 8-12 horas de desarrollo  

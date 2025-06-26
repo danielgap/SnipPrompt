@@ -29,8 +29,8 @@ export const RegisterForm = () => {
   return (
     <div className="card">
       <div className="card-body">
-        <h2 className="card-title">Registro</h2>
-        <form onSubmit={handleSubmit}>
+        <h2 className="card-title">Register</h2>
+        <form onSubmit={handleSubmit} className="form">
           {error && <div className="alert alert-danger">{error}</div>}
           <div className="form-group">
             <label htmlFor="username">Usuario</label>

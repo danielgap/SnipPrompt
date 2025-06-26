@@ -2,36 +2,36 @@ import { NextFunction, Request, Response } from 'express';
 import { ErrorResponse } from '../utils/ErrorResponse';
 
 /**
- * Middleware para verificar si el usuario autenticado es un administrador.
- * Debe usarse después del middleware `requireAuth`.
+ * Middleware to check if the authenticated user is an administrator.
+ * Must be used after the `requireAuth` middleware.
  *
- * @param req Request - Objeto de solicitud de Express.
- * @param res Response - Objeto de respuesta de Express.
- * @param next NextFunction - Función para pasar al siguiente middleware.
+ * @param req Request - Express request object.
+ * @param res Response - Express response object.
+ * @param next NextFunction - Function to pass to the next middleware.
  */
 export const requireAdmin = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  // Asumimos que requireAuth ya ha sido ejecutado y req.user está definido.
+  // We assume that requireAuth has already been executed and req.user is defined.
   if (!req.user) {
     return next(
-      new ErrorResponse(401, 'No autorizado. Se requiere autenticación.')
+      new ErrorResponse(401, 'Unauthorized. Authentication is required.')
     );
   }
 
-  // Verificamos si el rol del usuario es 'admin'.
+  // We check if the user's role is 'admin'.
   if (req.user.role !== 'admin') {
     return next(
       new ErrorResponse(
         403,
-        'Acceso denegado. Se requieren privilegios de administrador.'
+        'Access denied. Administrator privileges are required.'
       )
     );
   }
 
-  // Si el usuario es un administrador, pasamos al siguiente middleware.
+  // If the user is an administrator, we pass to the next middleware.
   next();
 };
 

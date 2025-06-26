@@ -3,7 +3,7 @@ version: '3.8'
 services:
   backend:
     image: node:16-alpine
-    container_name: snipprompt-backend-dev
+    container_name: SnippetBox2-backend-dev
     working_dir: /app
     ports:
       - "5000:5000"
@@ -17,11 +17,11 @@ services:
       - JWT_EXPIRES_IN=${JWT_EXPIRES_IN:-15m}
     command: sh -c "npm install && npm install -g nodemon ts-node && npm run dev:server"
     networks:
-      - snipprompt-network
+      - SnippetBox2-network
 
   frontend:
     image: node:16-alpine
-    container_name: snipprompt-frontend-dev
+    container_name: SnippetBox2-frontend-dev
     working_dir: /app
     user: "1000:1000"
     ports:
@@ -34,12 +34,12 @@ services:
       - CHOKIDAR_USEPOLLING=true
     command: sh -c "npm install && npm start"
     networks:
-      - snipprompt-network
+      - SnippetBox2-network
     depends_on:
       - backend
 
 networks:
-  snipprompt-network:
+  SnippetBox2-network:
     driver: bridge
 
 volumes:

@@ -1,4 +1,4 @@
-# 🚨 Troubleshooting - SnipPrompt Development
+# 🚨 Troubleshooting - SnippetBox2 Development
 
 ## 🐳 Errores Comunes de Docker
 
@@ -206,7 +206,7 @@ docker-compose -f docker-compose.simple.yml down -v
 docker system prune -a --volumes
 
 # Eliminar imágenes específicas
-docker rmi $(docker images -q snipprompt*)
+docker rmi $(docker images -q SnippetBox2*)
 
 # Reiniciar Docker Desktop (Windows/Mac)
 # O reiniciar servicio docker (Linux)
