@@ -9,6 +9,7 @@ import { errorHandler } from './middleware';
 // Routers
 import { snippetRouter } from './routes/snippets';
 import { authRoutes } from './routes/auth';
+import userRoutes from './routes/users';
 
 // Env config
 dotenv.config({ path: './src/config/.env' });
@@ -40,6 +41,7 @@ app.get(/^\/(?!api)/, (req: Request, res: Response) => {
 // Routes
 app.use('/api/snippets', snippetRouter);
 app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
 
 // Error handler
 app.use(errorHandler);

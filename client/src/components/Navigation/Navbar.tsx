@@ -4,10 +4,17 @@ import { useAuth } from '../../store/AuthContext';
 import routes from './routes.json';
 
 export const Navbar = () => {
-  const { isAuthenticated, user, logout, isLoading } = useAuth();
+  const { isAuthenticated, user, logout, isLoading, isUserAdmin } = useAuth();
 
   const authLinks = (
     <Fragment>
+      {isUserAdmin && (
+        <li className="nav-item">
+          <NavLink to="/admin/users" className="nav-link">
+            Admin
+          </NavLink>
+        </li>
+      )}
       <li className="nav-item">
         <span className="nav-link">Hola, {user?.username}</span>
       </li>

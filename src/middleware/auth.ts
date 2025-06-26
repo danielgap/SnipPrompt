@@ -2,17 +2,34 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { authConfig } from '../config/auth';
 import { ErrorResponse } from '../utils';
-import { UserModel } from '../models';
+import User from '../models/User';
 
-// Extendemos la interfaz de Request para incluir el userId
+// Extender la interfaz Request localmente
+declare global {
+  namespace Express {
+    interface Request {
+      user?: {
+        id: number;
+        role: string;
+      };
+      userId?: number;
+    }
+  }
+}
+
+// Tipo para peticiones autenticadas
 export interface AuthenticatedRequest extends Request {
+  user?: {
+    id: number;
+    role: string;
+  };
   userId?: number;
 }
 
 /**
  * @desc Middleware para proteger rutas. Requiere un token JWT válido.
  */
-export const requireAuth = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+export const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
   let token;
 
   // Verificar que el header Authorization existe y tiene el formato correcto "Bearer <token>"
@@ -29,14 +46,15 @@ export const requireAuth = async (req: AuthenticatedRequest, res: Response, next
     const decoded = jwt.verify(token, authConfig.jwtSecret) as { userId: number };
 
     // Verificar que el usuario del token existe y está activo
-    const user = await UserModel.findOne({ where: { id: decoded.userId, isActive: true } });
+    const user = await User.findOne({ where: { id: decoded.userId, isActive: true } });
 
     if (!user) {
       return next(new ErrorResponse(401, 'Usuario no encontrado o inactivo'));
     }
 
-    // Adjuntar el ID del usuario a la petición para uso en los controllers
-    req.userId = user.id;
+    // Adjuntar el objeto de usuario completo a la petición
+    req.user = user.toJSON();
+    req.userId = user.id; // Añadir userId para facilitar validaciones
 
     next();
   } catch (error) {
@@ -47,7 +65,7 @@ export const requireAuth = async (req: AuthenticatedRequest, res: Response, next
 /**
  * @desc Middleware para autenticación opcional. Si hay token, lo verifica, si no, continúa.
  */
-export const optionalAuth = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+export const optionalAuth = async (req: Request, res: Response, next: NextFunction) => {
   let token;
 
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
@@ -62,11 +80,12 @@ export const optionalAuth = async (req: AuthenticatedRequest, res: Response, nex
   try {
     // Verificar el token si existe
     const decoded = jwt.verify(token, authConfig.jwtSecret) as { userId: number };
-    const user = await UserModel.findOne({ where: { id: decoded.userId, isActive: true } });
+    const user = await User.findOne({ where: { id: decoded.userId, isActive: true } });
 
-    // Si el token es válido y el usuario existe, adjuntamos el ID
+    // Si el token es válido y el usuario existe, adjuntamos el objeto de usuario
     if (user) {
-      req.userId = user.id;
+      req.user = user.toJSON();
+      req.userId = user.id; // Añadir userId para facilitar validaciones
     }
   } catch (error) {
     // Si el token es inválido, simplemente ignoramos y continuamos.

@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { Op } from 'sequelize';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { UserModel } from '../models';
+import User from '../models/User';
 import { authConfig } from '../config/auth';
 import { ErrorResponse } from '../utils';
 import { asyncWrapper } from '../middleware';
@@ -40,8 +40,12 @@ export const register = asyncWrapper(
       return next(new ErrorResponse(400, 'La contraseña debe tener al menos 6 caracteres'));
     }
 
+    // Comprobar si es el primer usuario para asignarle el rol de admin
+    const userCount = await User.count();
+    const role = userCount === 0 ? 'admin' : authConfig.defaultRole;
+
     // Verificar si usuario ya existe
-    const existingUser = await UserModel.findOne({
+    const existingUser = await User.findOne({
       where: {
         [Op.or]: [{ username }, { email }]
       }
@@ -59,7 +63,7 @@ export const register = asyncWrapper(
       username,
       email,
       password: hashedPassword,
-      role: authConfig.defaultRole,
+      role: role,
       isActive: true,
     };
 
@@ -71,7 +75,7 @@ export const register = asyncWrapper(
     }
 
     // Crear usuario
-    const user = await UserModel.create(newUser);
+    const user = await User.create(newUser);
 
     // Generar token
     const token = generateToken(user.id);
@@ -105,7 +109,7 @@ export const login = asyncWrapper(
     }
 
     // Buscar usuario por username o email
-    const user = await UserModel.findOne({
+    const user = await User.findOne({
       where: {
         [Op.or]: [
           { username: usernameOrEmail },
@@ -156,7 +160,7 @@ export const getProfile = asyncWrapper(
     // El middleware de auth debe añadir userId a req
     const userId = (req as any).userId;
 
-    const user = await UserModel.findByPk(userId);
+    const user = await User.findByPk(userId);
     if (!user) {
       return next(new ErrorResponse(404, 'Usuario no encontrado'));
     }
