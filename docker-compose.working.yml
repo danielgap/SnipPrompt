@@ -1,8 +1,6 @@
-version: '3.8'
-
 services:
   backend:
-    image: node:16-alpine
+    image: node:18-alpine
     container_name: snipprompt-backend-dev
     working_dir: /app
     ports:
@@ -20,7 +18,7 @@ services:
       - snipprompt-network
 
   frontend:
-    image: node:16-alpine
+    image: node:18-alpine
     container_name: snipprompt-frontend-dev
     working_dir: /app
     ports:
@@ -32,7 +30,7 @@ services:
       - CHOKIDAR_USEPOLLING=true
       - npm_config_unsafe_perm=true
       - ESLINT_NO_CACHE=true
-    command: sh -c "npm install --cache=/tmp/.npm && npm start"
+    command: sh -c "npm install --cache=/tmp/.npm && ESLINT_NO_CACHE=true npm start"
     networks:
       - snipprompt-network
     depends_on:

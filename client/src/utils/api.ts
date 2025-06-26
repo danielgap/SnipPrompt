@@ -2,7 +2,11 @@ import axios from 'axios';
 
 // Creamos una instancia de Axios con configuración base
 const api = axios.create({
-  baseURL: '/api', // El proxy en package.json se encargará de redirigir a http://localhost:5000
+  // Usamos la variable de entorno para definir la URL base de la API.
+  // Esto es más explícito y fiable que depender del proxy de package.json.
+  // En Docker, apuntará a http://backend:5000/api
+  // En desarrollo local, podría apuntar a http://localhost:5000/api
+  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000/api',
   headers: {
     'Content-Type': 'application/json'
   }
