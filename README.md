@@ -1,26 +1,26 @@
 # SnippetBox2
 
-![Librería de Snippets](./.github/img/snippets.png)
+![Snippet Library](./.github/img/snippets.png)
 
-## Descripción
+## Description
 
-SnippetBox2 es una aplicación auto-hospedada para organizar tus fragmentos de código. Es una versión evolucionada del proyecto original [Snippet Box](https://github.com/pawelmalak/snippet-box), añadiendo funcionalidades clave como un sistema completo de gestión de usuarios, roles y seguridad mejorada para un entorno multi-usuario.
+SnippetBox2 is a self-hosted application for organizing your code snippets. It is an evolved version of the original [Snippet Box](https://github.com/pawelmalak/snippet-box) project, adding key features such as a complete user management system, roles, and enhanced security for a multi-user environment.
 
-Permite crear, editar, buscar y gestionar tus snippets en diversos lenguajes de forma sencilla. Con soporte integrado para Markdown, SnippetBox2 facilita la adición de notas o documentación a tu código.
+It allows you to easily create, edit, search, and manage your snippets in various languages. With built-in Markdown support, SnippetBox2 makes it easy to add notes or documentation to your code.
 
-## Mejoras Clave sobre el Original
+## Key Improvements Over the Original
 
-- **Gestión de Usuarios y Autenticación:** Sistema completo de registro e inicio de sesión de usuarios mediante un sistema seguro basado en JWT (JSON Web Tokens).
-- **Roles de Usuario (Administrador y Usuario):**
-  - **Administrador:** Tiene control total sobre todos los snippets y usuarios del sistema.
-  - **Usuario:** Solo puede gestionar sus propios snippets.
-- **Panel de Administración:** Una vista dedicada para que los administradores puedan gestionar todos los usuarios de la plataforma.
-- **Seguridad Mejorada:**
-  - Gestión segura de secretos (como el `JWT_SECRET`) a través de variables de entorno y archivos `.env`, evitando que las claves se expongan en el código fuente.
-  - Actualización de la imagen base de Docker y dependencias para corregir vulnerabilidades conocidas.
-- **Entorno de Producción Dockerizado:** Se ha optimizado el `Dockerfile` y `docker-compose.yml` para construir una imagen única, segura y robusta para producción.
+- **User Management and Authentication:** A complete user registration and login system using a secure JWT (JSON Web Tokens) based system.
+- **User Roles (Admin and User):**
+  - **Admin:** Has full control over all snippets and users in the system.
+  - **User:** Can only manage their own snippets.
+- **Admin Panel:** A dedicated view for administrators to manage all users on the platform.
+- **Enhanced Security:**
+  - Secure management of secrets (like `JWT_SECRET`) through environment variables and `.env` files, preventing keys from being exposed in the source code.
+  - Updated Docker base image and dependencies to fix known vulnerabilities.
+- **Dockerized Production Environment:** The `Dockerfile` and `docker-compose.yml` have been optimized to build a single, secure, and robust image for production.
 
-## Tecnología
+## Technology
 
 - **Backend**
   - Node.js (v24)
@@ -31,46 +31,46 @@ Permite crear, editar, buscar y gestionar tus snippets en diversos lenguajes de 
   - React
   - TypeScript
   - Bootstrap
-- **Despliegue**
+- **Deployment**
   - Docker & Docker Compose
 
-## Desarrollo
+## Development
 
-Para levantar un entorno de desarrollo local con recarga en caliente (hot-reloading) para el frontend y el backend.
+To set up a local development environment with hot-reloading for the frontend and backend.
 
-**Requisitos:** Docker y Docker Compose.
+**Requirements:** Docker and Docker Compose.
 
 ```sh
-# 1. Clona el repositorio
+# 1. Clone the repository
 git clone https://github.com/danielgap/SnippetBox2.git
 cd SnippetBox2
 
-# 2. Levanta los contenedores de desarrollo
-# Esto usará el archivo 'docker-compose.working.yml'
+# 2. Start the development containers
+# This will use the 'docker-compose.working.yml' file
 docker compose -f docker-compose.working.yml up --build
 ```
-- El frontend estará disponible en `http://localhost:3000`.
-- El backend estará disponible en `http://localhost:5000`.
+- The frontend will be available at `http://localhost:3000`.
+- The backend will be available at `http://localhost:5000`.
 
-## Despliegue en Producción (con Docker)
+## Production Deployment (with Docker)
 
-Estas instrucciones utilizan la imagen pre-construida y segura disponible en Docker Hub.
+These instructions use the pre-built, secure image available on Docker Hub.
 
-**Requisitos:** Docker y Docker Compose.
+**Requirements:** Docker and Docker Compose.
 
-#### 1. Crear el archivo `.env`
+#### 1. Create the `.env` file
 
-Crea un archivo llamado `.env` en la raíz del proyecto. Este archivo contendrá las variables de entorno, como el secreto para firmar los tokens de autenticación. Es ignorado por Git por seguridad.
+Create a file named `.env` in the project root. This file will contain environment variables, such as the secret for signing authentication tokens. It is ignored by Git for security.
 
 ```env
-# Genera un secreto aleatorio de 32 caracteres o más.
-# No uses el carácter '$' para evitar problemas con Docker Compose.
+# Generate a random secret of 32 characters or more.
+# Do not use the '$' character to avoid issues with Docker Compose.
 JWT_SECRET=bZ8pD3kF7gRjWnQ4tYvA1xLhS9mC6uE2
 ```
 
-#### 2. Usar Docker Compose (Recomendado)
+#### 2. Use Docker Compose (Recommended)
 
-Crea un archivo `docker-compose.yml` con el siguiente contenido:
+Create a `docker-compose.yml` file with the following content:
 
 ```yaml
 services:
@@ -87,40 +87,40 @@ services:
     restart: unless-stopped
 ```
 
-Y levanta el contenedor:
+And start the container:
 ```sh
 docker compose up -d
 ```
-La aplicación estará disponible en `http://localhost:5000`.
+The application will be available at `http://localhost:5000`.
 
-#### 3. Construir la imagen manualmente (Opcional)
+#### 3. Build the image manually (Optional)
 
-Si prefieres construir y gestionar tu propia imagen en lugar de usar la de Docker Hub.
+If you prefer to build and manage your own image instead of using the one from Docker Hub.
 
 ```sh
-# Construir la imagen
-docker build -t tu-usuario-docker/snippetbox2:latest .
+# Build the image
+docker build -t your-docker-user/snippetbox2:latest .
 
-# Subir la imagen a tu repositorio
-docker push tu-usuario-docker/snippetbox2:latest
+# Push the image to your repository
+docker push your-docker-user/snippetbox2:latest
 ```
 
-## Funcionalidad
+## Functionality
 
-- **Búsqueda:** Busca tus snippets con filtros de lenguaje y tags integrados.
-- **Snippets Anclados:** Ancla tus snippets favoritos o importantes a la pantalla de inicio para un acceso rápido.
+- **Search:** Search your snippets with built-in language and tag filters.
+- **Pinned Snippets:** Pin your favorite or important snippets to the home screen for quick access.
 
-![Pantalla de inicio](./.github/img/home.png)
+![Home screen](./.github/img/home.png)
 
-- **Librería de Snippets:** Gestiona tus snippets y filtra por tags.
+- **Snippet Library:** Manage your snippets and filter by tags.
 
-![Librería de Snippets](./.github/img/snippets.png)
+![Snippet Library](./.github/img/snippets.png)
 
-- **Detalle del Snippet:** Visualiza tu código con resaltado de sintaxis, detalles y documentación. Realiza acciones como editar, anclar o eliminar desde un único lugar.
+- **Snippet Details:** View your code with syntax highlighting, details, and documentation. Perform actions like editing, pinning, or deleting from a single place.
 
-![Detalle de Snippet](./.github/img/snippet.png)
+![Snippet Details](./.github/img/snippet.png)
 
-- **Editor:** Crea y edita tus snippets desde un editor simple y fácil de usar.
+- **Editor:** Create and edit your snippets from a simple and easy-to-use editor.
 
 ![Editor](./.github/img/editor.png)
 
