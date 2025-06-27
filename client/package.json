@@ -2,7 +2,13 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "overrides": {
+    "cross-spawn": "7.0.5",
+    "brace-expansion": "2.0.2"
+  },
   "dependencies": {
+    "@craco/craco": "^7.1.0",
+    "@fortawesome/fontawesome-svg-core": "^6.2.1",
     "@icons-pack/react-simple-icons": "^4.6.1",
     "@mdi/js": "^6.1.95",
     "@mdi/react": "^1.5.0",
@@ -22,9 +28,8 @@
     "react-router-dom": "^5.3.0",
     "react-scripts": "^5.0.1",
     "sass": "^1.89.2",
-    "typescript": "^4.4.3",
-    "@craco/craco": "^7.1.0",
-    "@fortawesome/fontawesome-svg-core": "^6.2.1"
+    "snippet-hub": "file:..",
+    "typescript": "^4.4.3"
   },
   "scripts": {
     "start": "craco start",

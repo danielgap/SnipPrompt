@@ -1,8 +1,6 @@
-version: '3.8'
-
 services:
   snippetbox2:
-    build: .
+    image: danielgap/snippetbox2:latest
     container_name: SnippetBox2
     ports:
       - "5000:5000"
@@ -10,5 +8,5 @@ services:
       - ./data:/app/data
     environment:
       - NODE_ENV=production
-      - JWT_SECRET=sW5HGd*dsaW_dSb_s3_sgrN0sw_yUpO
+      - JWT_SECRET=${JWT_SECRET}
     restart: unless-stopped
